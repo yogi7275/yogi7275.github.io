@@ -30,13 +30,13 @@ $contact->subject = $_POST['subject'];
 
 // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
 
-$contact->smtp = array(
-  'host' => 'smtp.gmail.com',
-  'username' => 'kvish4546@gmail.com',
-  'password' => 'uhkdyxrgrmyyvafu',
-  'port' => '465',
-  'secure' => 'ssl'
-);
+// $contact->smtp = array(
+//   'host' => 'smtp.gmail.com',
+//   'username' => 'kvish4546@gmail.com',
+//   'password' => '',
+//   'port' => '465',
+//   'secure' => 'ssl'
+// );
 
 $contact->add_message($_POST['name'], 'From');
 $contact->add_message($_POST['email'], 'Email');
