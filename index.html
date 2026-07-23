@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yogesh Vishvakarma - Portfolio</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
 
@@ -441,7 +447,6 @@
         height: 180px;
         border-radius: 50%;
         margin: 0 auto 1.2rem;
-        background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15));
         border: 0.5px solid rgba(255, 255, 255, 0.22);
         display: flex;
         align-items: center;
@@ -453,20 +458,39 @@
             0 0 0 1px rgba(255, 255, 255, 0.06),
             inset 0 1px 0 rgba(255, 255, 255, 0.2),
             0 12px 40px rgba(0, 0, 0, 0.3);
-        /* ring spin */
-        background: conic-gradient(rgba(0, 212, 255, 0.5), rgba(124, 58, 237, 0.5), rgba(6, 255, 165, 0.5), rgba(0, 212, 255, 0.5));
-        padding: 2px;
-        animation: frameSpin 6s linear infinite;
+        padding: 3px;
     }
 
-    @keyframes frameSpin {
-        from {
-            filter: hue-rotate(0deg)
-        }
+    /* Spinning background ring - does not apply hue-rotate filter to the image */
+    .photo-frame::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: conic-gradient(rgba(0, 212, 255, 0.6), rgba(124, 58, 237, 0.6), rgba(6, 255, 165, 0.6), rgba(0, 212, 255, 0.6));
+        animation: frameRotate 8s linear infinite;
+        z-index: 1;
+    }
 
-        to {
-            filter: hue-rotate(360deg)
+    @keyframes frameRotate {
+        from {
+            transform: rotate(0deg);
         }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .photo-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+        position: relative;
+        z-index: 2;
+        border: 3px solid #060b14;
+        filter: brightness(1.1);
     }
 
     .photo-placeholder {
@@ -524,24 +548,35 @@
     }
 
     .chip {
-        font-size: 0.72rem;
-        font-weight: 500;
-        padding: 4px 10px;
-        border-radius: 20px;
-        /* glass chip */
-        background: rgba(255, 255, 255, 0.07);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        font-size: 0.68rem;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 30px;
+        /* LIQUID GLASS matching skill-pill */
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(40px) saturate(220%) brightness(1.15);
+        -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.15);
         border: 0.5px solid rgba(255, 255, 255, 0.16);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-        color: var(--muted);
-        transition: all 0.2s;
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.14),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            0 4px 16px rgba(0, 0, 0, 0.15);
+        color: var(--text);
+        transition: all 0.25s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
     }
 
     .chip:hover {
-        background: rgba(0, 212, 255, 0.12);
-        border-color: rgba(0, 212, 255, 0.3);
-        color: var(--accent)
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(0, 212, 255, 0.35);
+        transform: translateY(-2px);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            0 8px 24px rgba(0, 212, 255, 0.25);
+        color: var(--accent);
     }
 
     .card-location {
@@ -554,6 +589,16 @@
         gap: 6px;
         position: relative;
         z-index: 2
+    }
+
+    .card-location svg {
+        width: 14px;
+        height: 14px;
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
     }
 
     /* ── SECTIONS ── */
@@ -585,18 +630,78 @@
     }
 
     /* ── SKILLS — glass pills ── */
+    .skills-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+    }
+
+    .skills-cat {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(40px) saturate(220%) brightness(1.12) contrast(1.02);
+        -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.12) contrast(1.02);
+        border: 0.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+        padding: 0.6rem 1.2rem;
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            0 8px 32px rgba(0, 0, 0, 0.12);
+        transition: all 0.3s ease;
+        gap: 1.5rem;
+    }
+
+    .skills-cat:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(0, 212, 255, 0.2);
+        transform: translateX(6px);
+    }
+
+    .skills-cat-title {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--accent);
+        font-weight: 800;
+        min-width: 130px;
+        margin: 0;
+        border-right: 1.5px solid rgba(255, 255, 255, 0.15);
+        padding-right: 1.2rem;
+    }
+
     .skills-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px
+        gap: 10px;
+        flex: 1;
+    }
+
+    @media (max-width: 768px) {
+        .skills-cat {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+        }
+
+        .skills-cat-title {
+            border-right: none;
+            border-bottom: 1.5px solid rgba(255, 255, 255, 0.15);
+            padding-right: 0;
+            padding-bottom: 0.5rem;
+            width: 100%;
+        }
     }
 
     .skill-pill {
         display: flex;
         align-items: center;
-        gap: 8px;
-        padding: 8px 16px;
-        border-radius: 40px;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 30px;
         /* LIQUID GLASS */
         background: rgba(255, 255, 255, 0.06);
         backdrop-filter: blur(40px) saturate(220%) brightness(1.15);
@@ -606,7 +711,7 @@
             inset 0 1px 0 rgba(255, 255, 255, 0.14),
             inset 0 -1px 0 rgba(0, 0, 0, 0.08),
             0 4px 16px rgba(0, 0, 0, 0.15);
-        font-size: 0.82rem;
+        font-size: 0.74rem;
         font-weight: 500;
         color: var(--text);
         transition: all 0.25s;
@@ -645,8 +750,8 @@
     /* ── PROJECTS — glass cards ── */
     .proj-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 12px
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 16px
     }
 
     .proj-card {
@@ -703,22 +808,62 @@
     }
 
     .proj-logo {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
         margin-bottom: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.2rem;
-        font-weight: 800;
-        /* glass icon */
+        /* glass icon with soft cyan glow */
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(20px);
-        border: 0.5px solid rgba(255, 255, 255, 0.16);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        border: 0.5px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            0 0 12px rgba(0, 212, 255, 0.25);
         position: relative;
         z-index: 2;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .proj-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 5px;
+        background: rgba(0, 0, 0, 0.25); /* dark backing to pop transparent/white logos */
+    }
+
+    .proj-card:hover .proj-logo {
+        border-color: rgba(0, 212, 255, 0.45);
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            0 0 20px rgba(0, 212, 255, 0.6);
+        transform: scale(1.05);
+    }
+
+    .proj-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .proj-header-row .proj-logo {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .proj-title-block {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        text-align: right;
+        align-items: flex-end;
     }
 
     .proj-name {
@@ -759,30 +904,351 @@
     }
 
     .ptag {
-        font-size: 0.7rem;
-        padding: 3px 8px;
-        border-radius: 6px;
+        font-size: 0.70rem;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 30px;
         background: rgba(255, 255, 255, 0.06);
-        border: 0.5px solid rgba(255, 255, 255, 0.12);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        color: var(--muted2);
+        backdrop-filter: blur(40px) saturate(220%) brightness(1.15);
+        -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.15);
+        border: 0.5px solid rgba(255, 255, 255, 0.16);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.14),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            0 4px 16px rgba(0, 0, 0, 0.15);
+        color: var(--text);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.25s;
+    }
+
+    .ptag:hover {
+        border-color: rgba(0, 212, 255, 0.35);
+        color: var(--accent);
+        background: rgba(0, 212, 255, 0.08);
+        transform: translateY(-1px);
+    }
+
+    .proj-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+        margin-top: 1.5rem;
     }
 
     .proj-link {
-        font-size: 0.78rem;
+        font-size: 0.82rem;
         color: var(--accent);
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 700;
         display: inline-flex;
         align-items: center;
-        gap: 5px;
-        transition: gap 0.2s;
+        gap: 6px;
+        transition: all 0.3s ease;
         position: relative;
-        z-index: 2
+        z-index: 2;
+    }
+
+    .proj-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1.5px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
     }
 
     .proj-link:hover {
-        gap: 10px
+        color: #fff;
+        gap: 10px;
+    }
+
+    .proj-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .proj-more-btn {
+        font-size: 0.76rem;
+        color: var(--accent);
+        background: rgba(0, 212, 255, 0.06);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 0.5px solid rgba(0, 212, 255, 0.25);
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.10),
+            0 4px 12px rgba(0, 212, 255, 0.12);
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-family: inherit;
+    }
+
+    .proj-more-btn:hover {
+        background: rgba(0, 212, 255, 0.16);
+        border-color: rgba(0, 212, 255, 0.45);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.15),
+            0 6px 20px rgba(0, 212, 255, 0.25);
+    }
+
+    /* ── MODAL SYSTEM ── */
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: rgba(6, 11, 20, 0.75);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        padding: 1.5rem;
+    }
+
+    .modal-overlay.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .modal-card {
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(80px) saturate(220%) brightness(1.15) contrast(1.02);
+        -webkit-backdrop-filter: blur(80px) saturate(220%) brightness(1.15) contrast(1.02);
+        border: 0.5px solid rgba(255, 255, 255, 0.22);
+        border-radius: 28px;
+        width: 100%;
+        max-width: 950px; /* Increased from 600px to 950px */
+        padding: 3rem;
+        box-shadow: 
+            0 24px 60px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        transform: scale(0.9);
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Modal top specular */
+    .modal-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 35%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 100%);
+        pointer-events: none;
+        border-radius: inherit;
+    }
+
+    .modal-overlay.active .modal-card {
+        transform: scale(1);
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 1.2rem;
+        right: 1.2rem;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 0.5px solid rgba(255, 255, 255, 0.16);
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: all 0.25s;
+        z-index: 10;
+    }
+
+    .modal-close:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: var(--text);
+        transform: rotate(90deg);
+    }
+
+    .modal-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .modal-image-container {
+        width: 100%;
+        aspect-ratio: 16/10;
+        background: rgba(255, 255, 255, 0.03);
+        border: 0.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 
+            inset 0 8px 32px rgba(0, 0, 0, 0.4),
+            0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: rgba(0, 0, 0, 0.35);
+        display: none;
+    }
+
+    .modal-img-fallback {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: var(--muted);
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .fallback-icon {
+        font-size: 3rem;
+        animation: floatIcon 3s ease-in-out infinite;
+    }
+
+    @keyframes floatIcon {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
+
+    .fallback-text {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted2);
+    }
+
+    .modal-content-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-title {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        margin-bottom: 6px;
+        color: var(--text);
+        line-height: 1.15;
+    }
+
+    .modal-type {
+        font-size: 0.82rem;
+        color: var(--accent);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
+
+    .modal-body {
+        margin-bottom: 2rem;
+    }
+
+    .modal-section-title {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--accent);
+        margin-bottom: 0.8rem;
+        font-weight: 800;
+    }
+
+    .modal-desc {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.75;
+        margin-bottom: 2rem;
+        max-height: 240px;
+        overflow-y: auto;
+        padding-right: 8px;
+    }
+
+    /* custom scrollbar for details */
+    .modal-desc::-webkit-scrollbar {
+        width: 4px;
+    }
+    .modal-desc::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 4px;
+    }
+    .modal-desc::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 4px;
+    }
+
+    .modal-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .modal-footer {
+        display: flex;
+        margin-top: auto;
+    }
+
+    @media(max-width: 850px) {
+        .modal-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .modal-card {
+            width: 95%;
+            padding: 2rem 1.25rem 1.5rem;
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+
+        .modal-desc {
+            max-height: none;
+            overflow: visible;
+            padding-right: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            top: 0.8rem;
+            right: 0.8rem;
+            width: 30px;
+            height: 30px;
+            font-size: 1.1rem;
+        }
     }
 
     /* ── EXPERIENCE — glass cards ── */
@@ -975,7 +1441,23 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 14px;
+    }
+
+    .c-icon svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: all 0.3s ease;
+    }
+
+    .contact-row:hover .c-icon svg {
+        transform: scale(1.15);
+        stroke: #ffffff;
+        filter: drop-shadow(0 0 4px var(--accent));
     }
 
     .contact-val {
@@ -1042,6 +1524,11 @@
             margin: 0 auto
         }
 
+        .proj-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
         .contact-glass {
             grid-template-columns: 1fr
         }
@@ -1062,7 +1549,22 @@
             padding: 80px 1.2rem 3rem
         }
     }
+
+    @media(max-width:380px) {
+        .proj-actions {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .proj-more-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
 </style>
+</head>
+<body>
 
 <div class="bg-canvas">
     <div class="orb orb1"></div>
@@ -1088,16 +1590,17 @@
                 <div class="badge-dot"></div> Available · Noida, UP ,India
             </div>
             <h1>Full Stack<br><span class="gradient-text">Developer</span><br>&amp; Problem Solver</h1>
-            <p class="hero-sub">Crafting scalable web applications, robust APIs, and seamless integrations with 4+ years
+            <p class="hero-sub">Crafting scalable web applications, robust APIs, and seamless integrations with 4.5+ years
                 of hands-on Laravel &amp; PHP expertise.</p>
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-glow"><span>View My Work →</span></a>
                 <a href="#contact" class="btn btn-ghost"><span>Let's Talk</span></a>
                 <a href="resume.pdf" target="_blank" class="btn btn-glow"><span>Resume</span></a>
+                <a href="cv.pdf" target="_blank" class="btn btn-ghost"><span>CV</span></a>
             </div>
             <div class="mini-stats">
                 <div class="mini-stat">
-                    <div class="mini-num"><span>4+</span></div>
+                    <div class="mini-num"><span>4.5+</span></div>
                     <div class="mini-label">Years Exp.</div>
                 </div>
                 <div class="mini-stat">
@@ -1112,21 +1615,23 @@
         </div>
         <div class="photo-card">
             <div class="photo-frame">
-                <div class="photo-placeholder">
-                    <div class="photo-initials">YV</div>
-                    <div class="photo-hint">ADD PHOTO</div>
-                </div>
+                <img src="profile_photo.png" alt="Yogesh Vishvakarma" class="photo-img">
             </div>
             <div class="card-name">Yogesh Vishvakarma</div>
             <div class="card-role">Full Stack Developer</div>
             <div class="card-chips">
-                <span class="chip">Laravel</span>
-                <span class="chip">PHP</span>
-                <span class="chip">MySQL</span>
-                <span class="chip">REST API</span>
-                <span class="chip">OpenAI</span>
+                <span class="chip"><span class="skill-dot" style="background:#ff6b35"></span>PHP</span>
+                <span class="chip"><span class="skill-dot" style="background:#ff2d20"></span>Laravel</span>
+                <span class="chip"><span class="skill-dot" style="background:#00758f"></span>MySQL</span>
+                <span class="chip"><span class="skill-dot" style="background:#336791"></span>PostgreSQL</span>
+                <span class="chip"><span class="skill-dot" style="background:#f34f29"></span>Git</span>
+                <span class="chip"><span class="skill-dot" style="background:#ff9900"></span>AWS</span>
+                <span class="chip"><span class="skill-dot" style="background:#fcc624"></span>Linux</span>
             </div>
-            <div class="card-location">📍 Sector-70, Noida, UP</div>
+            <div class="card-location">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Sector-70, Noida, UP
+            </div>
         </div>
     </div>
 </div>
@@ -1136,22 +1641,98 @@
         <div class="sec-eyebrow">What I work with</div>
         <div class="sec-title">Technical Stack</div>
     </div>
-    <div class="skills-row">
-        <div class="skill-pill"><span class="skill-dot" style="background:#ff6b35"></span>PHP</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#ff2d20"></span>Laravel</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#ee4523"></span>CodeIgniter</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#00d4ff"></span>REST APIs</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#f7df1e"></span>jQuery</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#563d7c"></span>Bootstrap</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#00758f"></span>MySQL</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#336791"></span>PostgreSQL</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#f34f29"></span>Git / GitHub</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#06ffa5"></span>WhatsApp API</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#412991"></span>OpenAI API</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#1877f2"></span>Social Media APIs</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#7c3aed"></span>Payment Gateway</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#f59e0b"></span>cPanel / VPS</div>
-        <div class="skill-pill"><span class="skill-dot" style="background:#ff6584"></span>Role-Based Auth</div>
+    <div class="skills-container">
+        <!-- Backend Category -->
+        <div class="skills-cat">
+            <h3 class="skills-cat-title">Backend</h3>
+            <div class="skills-row">
+                <div class="skill-pill"><span class="skill-dot" style="background:#ff6b35"></span>PHP</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ff2d20"></span>Laravel</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ee4523"></span>CodeIgniter</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#00d4ff"></span>REST APIs</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#88563b"></span>Composer</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#3b82f6"></span>MVC Architecture</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ec4899"></span>JWT Authentication</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#f43f5e"></span>Sanctum / Passport</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#10b981"></span>Cron Jobs</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#8b5cf6"></span>Queue Jobs</div>
+            </div>
+        </div>
+
+        <!-- Frontend Category -->
+        <div class="skills-cat">
+            <h3 class="skills-cat-title">Frontend</h3>
+            <div class="skills-row">
+                <div class="skill-pill"><span class="skill-dot" style="background:#e34f26"></span>HTML5</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#1572b6"></span>CSS3</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#563d7c"></span>Bootstrap</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#f7df1e"></span>jQuery</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#f7df1e"></span>JavaScript (ES6)</div>
+            </div>
+        </div>
+
+        <!-- Database Category -->
+        <div class="skills-cat">
+            <h3 class="skills-cat-title">Database</h3>
+            <div class="skills-row">
+                <div class="skill-pill"><span class="skill-dot" style="background:#00758f"></span>MySQL</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#336791"></span>PostgreSQL</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#10b981"></span>Database Design</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#f59e0b"></span>Query Optimization</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ff2d20"></span>Eloquent ORM</div>
+            </div>
+        </div>
+
+        <!-- Version Control Category -->
+        <div class="skills-cat">
+            <h3 class="skills-cat-title">Version Control</h3>
+            <div class="skills-row">
+                <div class="skill-pill"><span class="skill-dot" style="background:#f34f29"></span>Git / GitHub</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ff6c37"></span>Postman</div>
+            </div>
+        </div>
+
+        <!-- Deployment Category -->
+        <div class="skills-cat">
+            <h3 class="skills-cat-title">Deployment</h3>
+            <div class="skills-row">
+                <div class="skill-pill"><span class="skill-dot" style="background:#00a2e8"></span>Shared Hosting</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#f59e0b"></span>cPanel</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#4b5563"></span>VPS</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#d22128"></span>Apache</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#009639"></span>Nginx</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ff9900"></span>AWS EC2</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#00b0ff"></span>SSL</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#fcc624"></span>Linux</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#2b8252"></span>PM2</div>
+            </div>
+        </div>
+
+        <!-- Authentication Category -->
+        <div class="skills-cat">
+            <h3 class="skills-cat-title">Authentication</h3>
+            <div class="skills-row">
+                <div class="skill-pill"><span class="skill-dot" style="background:#ff6584"></span>RBAC</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#f43f5e"></span>Multi-Auth</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ec4899"></span>JWT</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#4285f4"></span>OAuth / Google Login</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#10b981"></span>Two-Factor Auth (2FA)</div>
+            </div>
+        </div>
+
+        <!-- Integrations Category -->
+        <div class="skills-cat">
+            <h3 class="skills-cat-title">Integrations</h3>
+            <div class="skills-row">
+                <div class="skill-pill"><span class="skill-dot" style="background:#7c3aed"></span>Payment Gateway</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#06ffa5"></span>WhatsApp API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#1d9bf0"></span>Email Services</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#1877f2"></span>Social Media APIs</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#412991"></span>OpenAI API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#0b72e7"></span>Razorpay / Stripe</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ea4335"></span>Google Maps API</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1162,54 +1743,99 @@
     </div>
     <div class="proj-grid">
         <div class="proj-card">
-            <div class="proj-logo" style="color:#00d4ff;font-size:1.4rem">🏢</div>
-            <div class="proj-name">Averti Systems</div>
-            <div class="proj-type">HR &amp; Operations Platform</div>
+            <div class="proj-header-row">
+                <div class="proj-logo">
+                    <img src="avery.png" alt="Averti Logo">
+                </div>
+                <div class="proj-title-block">
+                    <div class="proj-name">Averti Systems</div>
+                    <div class="proj-type">HR &amp; Operations Platform</div>
+                </div>
+            </div>
             <div class="proj-desc">Enterprise service management with employee tracking, salary, leave &amp; real-time
                 chat.</div>
-            <div class="proj-tags"><span class="ptag">Laravel</span><span class="ptag">RBAC</span><span
-                    class="ptag">REST API</span><span class="ptag">MySQL</span></div>
-            <a href="https://avertisystems.com" class="proj-link" target="_blank">Live Site →</a>
+            <div class="proj-tags"><span class="ptag"><span class="skill-dot" style="background:#ff2d20"></span>Laravel</span><span class="ptag"><span class="skill-dot" style="background:#ff6584"></span>RBAC</span><span
+                    class="ptag"><span class="skill-dot" style="background:#00d4ff"></span>REST API</span><span class="ptag"><span class="skill-dot" style="background:#00758f"></span>MySQL</span></div>
+            <div class="proj-actions">
+                <a href="https://avertisystems.com" class="proj-link" target="_blank">Live Site →</a>
+                <button class="proj-more-btn" onclick="openProjectModal('averti')">More Info</button>
+            </div>
         </div>
         <div class="proj-card">
-            <div class="proj-logo" style="color:#06ffa5;font-size:1.4rem">🏥</div>
-            <div class="proj-name">CCare ABG</div>
-            <div class="proj-type">Medical Report System</div>
+            <div class="proj-header-row">
+                <div class="proj-logo">
+                    <img src="ccareabg.png" alt="CCare Logo">
+                </div>
+                <div class="proj-title-block">
+                    <div class="proj-name">CCare ABG</div>
+                    <div class="proj-type">Medical Report System</div>
+                </div>
+            </div>
             <div class="proj-desc">ABG report generation for hospitals with multi-panel access, PDF export &amp; doctor
                 management.</div>
-            <div class="proj-tags"><span class="ptag">Laravel</span><span class="ptag">Multi-Auth</span><span
-                    class="ptag">PDF</span><span class="ptag">RBAC</span></div>
-            <a href="https://ccareabg.com" class="proj-link" target="_blank">Live Site →</a>
+            <div class="proj-tags"><span class="ptag"><span class="skill-dot" style="background:#ff2d20"></span>Laravel</span><span class="ptag"><span class="skill-dot" style="background:#ff6584"></span>Multi-Auth</span><span
+                    class="ptag"><span class="skill-dot" style="background:#ee4523"></span>PDF</span><span class="ptag"><span class="skill-dot" style="background:#ff6584"></span>RBAC</span></div>
+            <div class="proj-actions">
+                <a href="https://ccareabg.com" class="proj-link" target="_blank">Live Site →</a>
+                <button class="proj-more-btn" onclick="openProjectModal('ccare')">More Info</button>
+            </div>
         </div>
         <div class="proj-card">
-            <div class="proj-logo" style="color:#ff6584;font-size:1.4rem">📺</div>
-            <div class="proj-name">Women To Women TV</div>
-            <div class="proj-type">OTT Streaming Platform</div>
+            <div class="proj-header-row">
+                <div class="proj-logo">
+                    <img src="w2w.png" alt="W2W Logo">
+                </div>
+                <div class="proj-title-block">
+                    <div class="proj-name">Women To Women TV</div>
+                    <div class="proj-type">OTT Streaming Platform</div>
+                </div>
+            </div>
             <div class="proj-desc">Full OTT platform with content management, subscription &amp; device-based analytics.
             </div>
-            <div class="proj-tags"><span class="ptag">Laravel</span><span class="ptag">Subscriptions</span><span
-                    class="ptag">Analytics</span></div>
-            <a href="https://womentowomentv.com" class="proj-link" target="_blank">Live Site →</a>
+            <div class="proj-tags"><span class="ptag"><span class="skill-dot" style="background:#ff2d20"></span>Laravel</span><span class="ptag"><span class="skill-dot" style="background:#7c3aed"></span>Subscriptions</span><span
+                    class="ptag"><span class="skill-dot" style="background:#06ffa5"></span>Analytics</span></div>
+            <div class="proj-actions">
+                <a href="https://womentowomentv.com" class="proj-link" target="_blank">Live Site →</a>
+                <button class="proj-more-btn" onclick="openProjectModal('womentv')">More Info</button>
+            </div>
         </div>
         <div class="proj-card">
-            <div class="proj-logo" style="color:#a78bfa;font-size:1.4rem">🤖</div>
-            <div class="proj-name">Usaev.io</div>
-            <div class="proj-type">Social Media Automation</div>
+            <div class="proj-header-row">
+                <div class="proj-logo">
+                    <img src="usaev_io.png" alt="Usaev Logo">
+                </div>
+                <div class="proj-title-block">
+                    <div class="proj-name">Usaev.io</div>
+                    <div class="proj-type">Social Media Automation</div>
+                </div>
+            </div>
             <div class="proj-desc">AI-powered automation across 8 platforms — FB, IG, TikTok, LinkedIn &amp; more with
                 OpenAI content gen.</div>
-            <div class="proj-tags"><span class="ptag">OpenAI</span><span class="ptag">8 Platforms</span><span
-                    class="ptag">Laravel</span></div>
-            <a href="https://usaev.io" class="proj-link" target="_blank">Live Site →</a>
+            <div class="proj-tags"><span class="ptag"><span class="skill-dot" style="background:#412991"></span>OpenAI</span><span class="ptag"><span class="skill-dot" style="background:#f59e0b"></span>8 Platforms</span><span
+                    class="ptag"><span class="skill-dot" style="background:#ff2d20"></span>Laravel</span></div>
+            <div class="proj-actions">
+                <a href="https://usaev.io" class="proj-link" target="_blank">Live Site →</a>
+                <button class="proj-more-btn" onclick="openProjectModal('usaev')">More Info</button>
+            </div>
         </div>
         <div class="proj-card">
-            <div class="proj-logo" style="color:#fbbf24;font-size:1.4rem">🚚</div>
-            <div class="proj-name">GR Logistic</div>
-            <div class="proj-type">Logistics Management</div>
+            <div class="proj-header-row">
+                <div class="proj-logo">
+                    <img src="gr_logistic.png" alt="GR Logistic Logo">
+                </div>
+                <div class="proj-title-block">
+                    <div class="proj-name">GR Logistic</div>
+                    <div class="proj-type">Logistics Management</div>
+                </div>
+            </div>
             <div class="proj-desc">End-to-end logistics with warehouse, shipping, real-time tracking &amp; WhatsApp
                 notifications.</div>
-            <div class="proj-tags"><span class="ptag">WhatsApp API</span><span class="ptag">Email</span><span
-                    class="ptag">Tracking</span></div>
-            <a href="https://grlogisticandsarvices.com" class="proj-link" target="_blank">Live Site →</a>
+            <div class="proj-tags"><span class="ptag"><span class="skill-dot" style="background:#06ffa5"></span>WhatsApp API</span><span class="ptag"><span class="skill-dot" style="background:#1877f2"></span>Email</span><span
+                    class="ptag"><span class="skill-dot" style="background:#f59e0b"></span>Tracking</span></div>
+            <div class="proj-actions">
+                <a href="https://grlogisticandsarvices.com" class="proj-link" target="_blank">Live Site →</a>
+                <button class="proj-more-btn" onclick="openProjectModal('grlogistic')">More Info</button>
+            </div>
         </div>
     </div>
 </div>
@@ -1263,15 +1889,21 @@
             <p class="contact-sub">Open to freelance projects, full-time roles &amp; interesting collaborations. Feel
                 free to reach out anytime.</p>
             <div class="contact-row">
-                <div class="c-icon">📧</div>
+                <div class="c-icon">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
                 <div class="contact-val">yog7275@gmail.com</div>
             </div>
             <div class="contact-row">
-                <div class="c-icon">📱</div>
+                <div class="c-icon">
+                    <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                </div>
                 <div class="contact-val">+91 7275939382 / 8858767622</div>
             </div>
             <div class="contact-row">
-                <div class="c-icon">📍</div>
+                <div class="c-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
                 <div class="contact-val">Sector-70, Noida, UP</div>
             </div>
         </div>
@@ -1282,7 +1914,7 @@
             </div>
             <div class="info-box">
                 <div class="info-label">Experience</div>
-                <div class="info-val">4+ Years · 10+ Live Products</div>
+                <div class="info-val">4.5+ Years · 10+ Live Products</div>
             </div>
             <div class="info-box">
                 <div class="info-label">Education</div>
@@ -1296,4 +1928,171 @@
     </div>
 </div>
 
-<footer>Yogesh Vishvakarma © 2025 · Full Stack Developer · Noida, India</footer>
+<footer>Yogesh Vishvakarma © 2026 · Full Stack Developer · Noida, India</footer>
+
+<!-- Project Details Modal Overlay -->
+<div class="modal-overlay" id="projectModal" onclick="handleOverlayClick(event)">
+    <div class="modal-card">
+        <button class="modal-close" onclick="closeProjectModal()">×</button>
+        <div class="modal-grid">
+            <!-- Left side: Image container -->
+            <div class="modal-image-container">
+                <img id="modalImage" src="" alt="Project Screenshot" class="modal-img">
+                <div id="modalImageFallback" class="modal-img-fallback">
+                    <span class="fallback-icon">💻</span>
+                    <span class="fallback-text">No Screenshot Available</span>
+                </div>
+            </div>
+            <!-- Right side: Content container -->
+            <div class="modal-content-container">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modalTitle">Project Title</h2>
+                    <div class="modal-type" id="modalType">PROJECT TYPE</div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section-title">Description</div>
+                    <p class="modal-desc" id="modalDesc">Detailed description...</p>
+                    
+                    <div class="modal-section-title font-size-adjustment" style="margin-top: 1.5rem;">Technologies Used</div>
+                    <div class="modal-stack" id="modalStack">
+                        <!-- Tech stack pills with colorful dots render here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="modalLiveLink" target="_blank" class="btn btn-glow"><span>Live Site →</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Project Details Data - You can easily edit these descriptions to write more brief/detailed info!
+    // Simply specify your image path in "image: 'path/to/image.png'" to load screenshots in the modal!
+    const projectDetails = {
+        averti: {
+            title: "Averti Systems",
+            type: "HR & Operations Platform",
+            desc: "Averti Systems is a robust, enterprise-grade HR and operations portal designed to streamline day-to-day service administration. It features real-time employee geotracking, precise attendance logs, dynamic salary calculation with payroll distribution, and automated leave request workflows. Additionally, it contains an integrated WebSocket chat client for secure, instant messaging across organization channels, reducing third-party dependency while guaranteeing high-speed performance.",
+            image: "avery.png",
+            stack: [
+                { name: "Laravel", color: "#ff2d20" },
+                { name: "RBAC", color: "#ff6584" },
+                { name: "REST API", color: "#00d4ff" },
+                { name: "MySQL", color: "#00758f" }
+            ],
+            link: "https://avertisystems.com"
+        },
+        ccare: {
+            title: "CCare ABG",
+            type: "Medical Report System",
+            desc: "CCare ABG is a dedicated clinical diagnostic application built for arterial blood gas report processing. It enables laboratory staff, doctors, and hospital administrators to register patient entries, process raw gas metric calculations, export official PDF lab reports, and manage multi-panel workflow profiles. Built with strict role-based access controls, it enforces compliance standards and protects sensitive patient records across database instances.",
+            image: "ccareabg.png",
+            stack: [
+                { name: "Laravel", color: "#ff2d20" },
+                { name: "Multi-Auth", color: "#ff6584" },
+                { name: "PDF", color: "#ee4523" },
+                { name: "RBAC", color: "#ff6584" }
+            ],
+            link: "https://ccareabg.com"
+        },
+        womentv: {
+            title: "Women To Women TV",
+            type: "OTT Streaming Platform",
+            desc: "Women To Women TV is a customized video-on-demand and subscription-based OTT streaming network. It contains a high-capacity media manager for content organizers, multi-tier subscription purchase gateways, content security controls, and robust analytical logs. Organize and stream video segments while monitoring user viewing stats, drop-off rates, and browser/device metadata through a sleek interface.",
+            image: "w2w.png",
+            stack: [
+                { name: "Laravel", color: "#ff2d20" },
+                { name: "Subscriptions", color: "#7c3aed" },
+                { name: "Analytics", color: "#06ffa5" }
+            ],
+            link: "https://womentowomentv.com"
+        },
+        usaev: {
+            title: "Usaev.io",
+            type: "Social Media Automation",
+            desc: "Usaev.io is an automated cross-platform social media distribution scheduler that controls feeds across 8 top platforms (Facebook, Instagram, LinkedIn, TikTok, Twitter/X, and others). Integrating OpenAI APIs, it automatically drafts contextual copy, suggests hashtags, creates layouts, and registers scheduling logs. This saves countless hours of social media management overhead via an intuitive, centralized panel.",
+            image: "usaev_io.png",
+            stack: [
+                { name: "OpenAI", color: "#412991" },
+                { name: "8 Platforms", color: "#f59e0b" },
+                { name: "Laravel", color: "#ff2d20" }
+            ],
+            link: "https://usaev.io"
+        },
+        grlogistic: {
+            title: "GR Logistic",
+            type: "Logistics Management",
+            desc: "GR Logistic is an end-to-end logistics platform optimizing supply chain flow. It monitors warehouse storage capacity, registers incoming and outgoing shipping tracking numbers, maps dispatch routes in real-time, and dispatches automated status updates. Integrated with WhatsApp API and automated mail processes, clients are notified at every milestone from pickup to successful delivery.",
+            image: "gr_logistic.png",
+            stack: [
+                { name: "WhatsApp API", color: "#06ffa5" },
+                { name: "Email", color: "#1877f2" },
+                { name: "Tracking", color: "#f59e0b" }
+            ],
+            link: "https://grlogisticandsarvices.com"
+        }
+    };
+
+    function openProjectModal(projectId) {
+        const project = projectDetails[projectId];
+        if (!project) return;
+
+        // Set Title, Type, and Description
+        document.getElementById('modalTitle').innerText = project.title;
+        document.getElementById('modalType').innerText = project.type;
+        document.getElementById('modalDesc').innerText = project.desc;
+        document.getElementById('modalLiveLink').href = project.link;
+
+        // Handle Image loading & Fallback display
+        const imgEl = document.getElementById('modalImage');
+        const fallbackEl = document.getElementById('modalImageFallback');
+        if (project.image && project.image !== "") {
+            imgEl.src = project.image;
+            imgEl.style.display = 'block';
+            fallbackEl.style.display = 'none';
+        } else {
+            imgEl.src = '';
+            imgEl.style.display = 'none';
+            fallbackEl.style.display = 'flex';
+        }
+
+        // Render Tech Stack dynamically matching the colorful dot theme
+        const stackContainer = document.getElementById('modalStack');
+        stackContainer.innerHTML = '';
+        project.stack.forEach(tech => {
+            const pill = document.createElement('span');
+            pill.className = 'ptag';
+            pill.innerHTML = `<span class="skill-dot" style="background:${tech.color}"></span>${tech.name}`;
+            stackContainer.appendChild(pill);
+        });
+
+        // Show Modal
+        const modal = document.getElementById('projectModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Disable page scrolling while modal is open
+    }
+
+    function closeProjectModal() {
+        const modal = document.getElementById('projectModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Enable page scrolling
+    }
+
+    function handleOverlayClick(event) {
+        // Close modal if clicked outside the card
+        if (event.target.classList.contains('modal-overlay')) {
+            closeProjectModal();
+        }
+    }
+
+    // Close modal on Escape key press
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeProjectModal();
+        }
+    });
+</script>
+
+</body>
+</html>
