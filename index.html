@@ -304,6 +304,7 @@
         font-family: inherit;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
         position: relative;
         overflow: hidden;
@@ -601,6 +602,232 @@
         stroke-linejoin: round;
     }
 
+    .card-location svg {
+        width: 14px;
+        height: 14px;
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* ── COMPONENT EXTENSIONS ── */
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .form-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 0.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-family: inherit;
+        font-size: 0.8rem;
+        color: var(--text);
+        outline: none;
+        transition: all 0.3s;
+    }
+
+    .form-input:focus {
+        border-color: var(--accent);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
+    }
+
+    .form-input::placeholder {
+        color: var(--muted2);
+        font-size: 0.8rem;
+    }
+
+    .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: rgba(11, 15, 25, 0.85);
+        backdrop-filter: blur(20px);
+        border: 0.5px solid var(--accent);
+        border-radius: 12px;
+        padding: 12px 24px;
+        color: var(--text);
+        font-size: 0.85rem;
+        font-weight: 500;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 212, 255, 0.2);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    .proj-filters {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(20px);
+        border: 0.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+        padding: 6px 16px;
+        font-family: inherit;
+        font-size: 0.78rem;
+        font-weight: 550;
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .filter-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(0, 212, 255, 0.25);
+        transform: translateY(-1px);
+    }
+
+    .filter-btn.active {
+        background: rgba(0, 212, 255, 0.12);
+        border-color: var(--accent);
+        color: var(--accent);
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    }
+
+    .scroll-top-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(11, 15, 25, 0.7);
+        backdrop-filter: blur(20px);
+        border: 0.5px solid rgba(255, 255, 255, 0.16);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(15px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .scroll-top-btn.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .scroll-top-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: var(--text);
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: all 0.25s;
+    }
+
+    .scroll-top-btn:hover {
+        border-color: var(--accent);
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.35);
+        transform: translateY(-3px);
+    }
+
+    .scroll-top-btn:hover svg {
+        stroke: var(--accent);
+        transform: translateY(-1px);
+    }
+
+    .pdf-modal-card {
+        background: rgba(11, 15, 25, 0.85);
+        backdrop-filter: blur(80px) saturate(220%) brightness(1.15) contrast(1.02);
+        -webkit-backdrop-filter: blur(80px) saturate(220%) brightness(1.15) contrast(1.02);
+        border: 0.5px solid rgba(255, 255, 255, 0.22);
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.25),
+            0 24px 70px rgba(0, 0, 0, 0.6);
+        border-radius: 24px;
+        width: 90%;
+        max-width: 900px;
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+        padding: 2.5rem 2rem 2rem;
+        position: relative;
+        z-index: 1000;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+    }
+
+    .pdf-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-right: 2rem;
+    }
+
+    .pdf-modal-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: -0.5px;
+    }
+
+    .pdf-download-btn {
+        padding: 6px 14px;
+        font-size: 0.78rem;
+    }
+
+    .pdf-iframe-container {
+        flex: 1;
+        width: 100%;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 0.5px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .pdf-iframe-container iframe {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    @media (max-width: 850px) {
+        .pdf-modal-card {
+            width: 95%;
+            height: 90vh;
+            padding: 2rem 1.25rem 1.5rem;
+        }
+        .pdf-modal-header {
+            padding-right: 1.5rem;
+        }
+    }
+
     /* ── SECTIONS ── */
     .wrap {
         max-width: 1100px;
@@ -833,7 +1060,7 @@
         height: 100%;
         object-fit: contain;
         padding: 5px;
-        background: rgba(0, 0, 0, 0.25); /* dark backing to pop transparent/white logos */
+        background: #090c14; /* solid deep dark background for rich contrast and pop */
     }
 
     .proj-card:hover .proj-logo {
@@ -1595,8 +1822,8 @@
             <div class="hero-actions">
                 <a href="#projects" class="btn btn-glow"><span>View My Work →</span></a>
                 <a href="#contact" class="btn btn-ghost"><span>Let's Talk</span></a>
-                <a href="resume.pdf" target="_blank" class="btn btn-glow"><span>Resume</span></a>
-                <a href="cv.pdf" target="_blank" class="btn btn-ghost"><span>CV</span></a>
+                <a href="resume.pdf" target="_blank" id="resumeBtn" class="btn btn-glow"><span>Resume</span></a>
+                <a href="cv.pdf" target="_blank" id="cvBtn" class="btn btn-ghost"><span>CV</span></a>
             </div>
             <div class="mini-stats">
                 <div class="mini-stat">
@@ -1727,10 +1954,16 @@
                 <div class="skill-pill"><span class="skill-dot" style="background:#7c3aed"></span>Payment Gateway</div>
                 <div class="skill-pill"><span class="skill-dot" style="background:#06ffa5"></span>WhatsApp API</div>
                 <div class="skill-pill"><span class="skill-dot" style="background:#1d9bf0"></span>Email Services</div>
-                <div class="skill-pill"><span class="skill-dot" style="background:#1877f2"></span>Social Media APIs</div>
                 <div class="skill-pill"><span class="skill-dot" style="background:#412991"></span>OpenAI API</div>
-                <div class="skill-pill"><span class="skill-dot" style="background:#0b72e7"></span>Razorpay / Stripe</div>
                 <div class="skill-pill"><span class="skill-dot" style="background:#ea4335"></span>Google Maps API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#1877f2"></span>Facebook API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#e1306c"></span>Instagram API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ffffff"></span>X (Twitter) API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#0077b5"></span>LinkedIn API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ff0000"></span>YouTube API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#bd081c"></span>Pinterest API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#ff0050"></span>TikTok API</div>
+                <div class="skill-pill"><span class="skill-dot" style="background:#6364ff"></span>Mastodon API</div>
             </div>
         </div>
     </div>
@@ -1741,8 +1974,13 @@
         <div class="sec-eyebrow">What I've Built</div>
         <div class="sec-title">Featured Projects</div>
     </div>
+    <div class="proj-filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="laravel">Laravel Stack</button>
+        <button class="filter-btn" data-filter="automation">APIs &amp; Automation</button>
+    </div>
     <div class="proj-grid">
-        <div class="proj-card">
+        <div class="proj-card" data-category="laravel">
             <div class="proj-header-row">
                 <div class="proj-logo">
                     <img src="avery.png" alt="Averti Logo">
@@ -1761,7 +1999,7 @@
                 <button class="proj-more-btn" onclick="openProjectModal('averti')">More Info</button>
             </div>
         </div>
-        <div class="proj-card">
+        <div class="proj-card" data-category="laravel">
             <div class="proj-header-row">
                 <div class="proj-logo">
                     <img src="ccareabg.png" alt="CCare Logo">
@@ -1780,7 +2018,7 @@
                 <button class="proj-more-btn" onclick="openProjectModal('ccare')">More Info</button>
             </div>
         </div>
-        <div class="proj-card">
+        <div class="proj-card" data-category="laravel">
             <div class="proj-header-row">
                 <div class="proj-logo">
                     <img src="w2w.png" alt="W2W Logo">
@@ -1799,7 +2037,7 @@
                 <button class="proj-more-btn" onclick="openProjectModal('womentv')">More Info</button>
             </div>
         </div>
-        <div class="proj-card">
+        <div class="proj-card" data-category="laravel automation">
             <div class="proj-header-row">
                 <div class="proj-logo">
                     <img src="usaev_io.png" alt="Usaev Logo">
@@ -1818,7 +2056,7 @@
                 <button class="proj-more-btn" onclick="openProjectModal('usaev')">More Info</button>
             </div>
         </div>
-        <div class="proj-card">
+        <div class="proj-card" data-category="automation">
             <div class="proj-header-row">
                 <div class="proj-logo">
                     <img src="gr_logistic.png" alt="GR Logistic Logo">
@@ -1886,8 +2124,7 @@
         <div>
             <div class="contact-big">Let's build<br><span class="gradient-text">something great</span><br>together.
             </div>
-            <p class="contact-sub">Open to freelance projects, full-time roles &amp; interesting collaborations. Feel
-                free to reach out anytime.</p>
+            <p class="contact-sub">I am actively open for <strong>Freelance</strong>, <strong>Full-time Remote</strong>, <strong>Part-time</strong>, or <strong>Contract-based</strong> opportunities. Please fill out this form to connect, and I'll respond within 24 hours.</p>
             <div class="contact-row">
                 <div class="c-icon">
                     <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -1908,22 +2145,50 @@
             </div>
         </div>
         <div class="contact-right">
-            <div class="info-box">
-                <div class="info-label">Primary Stack</div>
-                <div class="info-val">Laravel · PHP · MySQL</div>
-            </div>
-            <div class="info-box">
-                <div class="info-label">Experience</div>
-                <div class="info-val">4.5+ Years · 10+ Live Products</div>
-            </div>
-            <div class="info-box">
-                <div class="info-label">Education</div>
-                <div class="info-val">MCA · KNIT Sultanpur</div>
-            </div>
-            <div class="info-box">
-                <div class="info-label">Location</div>
-                <div class="info-val">Noida · Open to Remote</div>
-            </div>
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/xnjegnwk" method="POST">
+                <!-- Honeypot field to prevent bot spam -->
+                <input type="text" name="_gotcha" style="display:none">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="subject" class="form-input" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" class="form-input" placeholder="Your Message" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-glow" style="margin-top: 5px; width: 100%;">
+                    <span>Send Message</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toastNotification" class="toast">
+    <span style="font-size: 1.1rem;">🔔</span>
+    <span id="toastMessage">Message sent successfully!</span>
+</div>
+
+<!-- Scroll to Top Floating Button -->
+<button id="scrollToTop" class="scroll-top-btn" title="Go to Top">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+<!-- CV/Resume PDF Viewer Modal -->
+<div class="modal-overlay" id="pdfModal" onclick="handlePdfOverlayClick(event)">
+    <div class="pdf-modal-card">
+        <button class="modal-close" onclick="closePdfModal()">×</button>
+        <div class="pdf-modal-header">
+            <h3 id="pdfModalTitle" class="pdf-modal-title">My Document</h3>
+            <a id="pdfDownloadLink" href="" download class="btn btn-glow pdf-download-btn"><span>Download PDF</span></a>
+        </div>
+        <div class="pdf-iframe-container">
+            <iframe id="pdfIframe" src="" frameborder="0"></iframe>
         </div>
     </div>
 </div>
@@ -2090,8 +2355,202 @@
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             closeProjectModal();
+            closePdfModal();
         }
     });
+
+    // Category Filtering logic
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.proj-card');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                const categories = card.getAttribute('data-category').split(' ');
+                
+                if (filterValue === 'all' || categories.includes(filterValue)) {
+                    card.style.display = '';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1) translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95) translateY(10px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+
+    // Animated Counters for Stats
+    function animateCounters() {
+        const counters = document.querySelectorAll('.mini-num span');
+        counters.forEach(counter => {
+            const finalValText = counter.textContent.trim();
+            const targetValue = parseFloat(finalValText);
+            const isFloat = finalValText.includes('.');
+            const suffix = finalValText.replace(/[0-9.]/g, '');
+            
+            let current = 0;
+            const duration = 1200;
+            const startTime = performance.now();
+            
+            function step(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const ease = 1 - Math.pow(1 - progress, 3);
+                current = ease * targetValue;
+                
+                if (isFloat) {
+                    counter.textContent = current.toFixed(1) + suffix;
+                } else {
+                    counter.textContent = Math.floor(current) + suffix;
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    counter.textContent = finalValText;
+                }
+            }
+            
+            requestAnimationFrame(step);
+        });
+    }
+    
+    window.addEventListener('load', animateCounters);
+
+    // Scroll To Top FAB
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+    
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Toast Alert Helper
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toastNotification');
+        const toastMsg = document.getElementById('toastMessage');
+        
+        toastMsg.textContent = message;
+        toast.style.borderColor = isError ? '#f43f5e' : 'var(--accent)';
+        toast.querySelector('span').textContent = isError ? '❌' : '🔔';
+        
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3500);
+    }
+
+    // AJAX Contact Form Submission
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Sending...</span>';
+            
+            const formData = new FormData(contactForm);
+            
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                
+                if (response.ok) {
+                    showToast("Message sent successfully! I'll get back to you soon.");
+                    contactForm.reset();
+                } else {
+                    if (contactForm.action.includes('placeholder')) {
+                        showToast("Form simulation successful! (Please insert your Formspree ID inside HTML)", false);
+                        contactForm.reset();
+                    } else {
+                        showToast("Oops! There was a problem sending your message.", true);
+                    }
+                }
+            })
+            .catch(error => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                showToast("Network error! Please check your internet connection.", true);
+            });
+        });
+    }
+
+    // PDF Viewer Modal Functions
+    const pdfModal = document.getElementById('pdfModal');
+    const pdfIframe = document.getElementById('pdfIframe');
+    const pdfModalTitle = document.getElementById('pdfModalTitle');
+    const pdfDownloadLink = document.getElementById('pdfDownloadLink');
+
+    function openPdfModal(pdfUrl, title) {
+        pdfModalTitle.textContent = title;
+        pdfDownloadLink.href = pdfUrl;
+        pdfIframe.src = pdfUrl;
+        pdfModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePdfModal() {
+        pdfModal.classList.remove('active');
+        pdfIframe.src = '';
+        document.body.style.overflow = '';
+    }
+
+    function handlePdfOverlayClick(event) {
+        if (event.target.classList.contains('modal-overlay')) {
+            closePdfModal();
+        }
+    }
+
+    // Intercept clicks on Resume / CV buttons
+    const resumeBtn = document.getElementById('resumeBtn');
+    const cvBtn = document.getElementById('cvBtn');
+
+    if (resumeBtn) {
+        resumeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openPdfModal('resume.pdf', 'My Resume');
+        });
+    }
+
+    if (cvBtn) {
+        cvBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openPdfModal('cv.pdf', 'My Curriculum Vitae');
+        });
+    }
 </script>
 
 </body>
